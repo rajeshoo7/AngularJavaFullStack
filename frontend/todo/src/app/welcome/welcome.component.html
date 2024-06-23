@@ -4,4 +4,32 @@
   Welcome {{name}}. You can manage your todos <a routerLink="/todos">here</a>
 </div>
 
+<div class="container">
+Click her to get a customized welcome message
+<button (click)="getWelcomeMessage()" class ="btn  btn-success">GetWelcomMessage</button>
+
+</div>
+
+<div class="container" *ngIf="welcomeMessageFromService">
+
+  <h2>Your Customized Welcome Message</h2>
+  {{welcomeMessageFromService}}
+
+  </div>
+<br>
+<br>
+
+  <div class="container">
+    Click her to get a customized welcome message 2
+    <button (click)="getWelcomeMessageWithParameter()" class ="btn  btn-success">GetWelcomMessage_2</button>
+
+    </div>
+
+  <div class="container" *ngIf="welcomeMessageFromService2">
+
+    <h2>Your Customized Welcome Message</h2>
+    {{welcomeMessageFromService2}}
+
+    </div>
+
 
