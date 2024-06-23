@@ -18,8 +18,6 @@ export class Todo {
 }
 
 
-
-
 @Component({
     selector: 'app-list-todos',
     templateUrl: './list-todos.component.html',

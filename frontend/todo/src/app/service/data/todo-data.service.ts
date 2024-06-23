@@ -7,22 +7,35 @@ import { Todo } from '../../list-todos/list-todos.component';
 })
 export class TodoDataService {
 
+  TODO_JPA_API_URL =`http://localhost:8080`
+
   constructor(
     private http:HttpClient
   ) { }
 
-  retrieveAllTodos(username:string){
 
-    console.log("Execute Hello World Bean Service");
-
+  retrieveAllTodos(username: string) {
     return this.http.get<Todo[]>(`http://localhost:8080/users/${username}/todos`);
+    //console.log("Execute Hello World Bean Service")
+  }
 
-    }
+  deleteTodo(username: string, id: number) {
+    return this.http.delete(`http://localhost:8080/users/${username}/todos/${id}`);
+  }
 
-    deleteTodo(username:string,id:number){
-      console.log("Delete todo: ", id);
-      return this.http.delete(`http://locahost:8080/users/${username}/todos/${id}`);
-    }
+  retrieveTodo(username: string, id: number) {
+    return this.http.get<Todo>(`http://localhost:8080/users/${username}/todos/${id}`);
+  }
 
+  updateTodo(username: string, id: number, todo: Todo) {
+    return this.http.put(
+      `http://localhost:8080/users/${username}/todos/${id}`
+      , todo);
+  }
 
+  createTodo(username: string, todo: Todo) {
+    return this.http.post(
+      `http://localhost:8080/users/${username}/todos`
+      , todo);
+  }
 }

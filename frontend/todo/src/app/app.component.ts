@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { LoginComponent } from "./login/login.component";
 import {MenuComponent} from "./menu/menu.component";
 import { WelcomeComponent } from './welcome/welcome.component';
+import {TodoComponent} from './todo/todo.component';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, LoginComponent,MenuComponent,FooterComponent,WelcomeComponent]
+    imports: [RouterOutlet, LoginComponent,MenuComponent,FooterComponent,WelcomeComponent,TodoComponent]
 })
 export class AppComponent {
   title = 'todo';
