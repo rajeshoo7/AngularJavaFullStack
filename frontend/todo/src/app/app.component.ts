@@ -23,7 +23,8 @@ import { ListTodosComponent } from './list-todos/list-todos.component';
         TodoComponent,
         ListTodosComponent,
         HttpClientModule
-    ],
+    ]
+    ,
     providers: [
         {
             provide: HTTP_INTERCEPTORS,

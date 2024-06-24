@@ -18,38 +18,42 @@ export class WelcomeDataService {
   executeHelloWorldBeanService(){
 
     console.log("Execute Hello World Bean Service");
-    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
+  //  let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
 
-    let headers = new HttpHeaders({
-        Authorization: basicAuthHeaderString
-      })
+    // let headers = new HttpHeaders({
+    //     Authorization: basicAuthHeaderString
+    //   })
 
-    return this.http.get<HelloWorldBean>('http://localhost:8080/hello-world-bean',{headers});
+    return this.http.get<HelloWorldBean>('http://localhost:8080/hello-world-bean'
+    //  {headers}
+    );
 
 
 
   }
 
   executeHelloWorldBeanServiceWithPathVariable(name:string){
-    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
+    // let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
 
-    let headers = new HttpHeaders({
-        Authorization: basicAuthHeaderString
-      })
+    // let headers = new HttpHeaders({
+    //     Authorization: basicAuthHeaderString
+    //   })
 
 
     console.log("Execute Hello World Bean Service");
 
-    return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world/path-variable/${name}`,{headers});
+    return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world/path-variable/${name}`
+      //,{headers}
+      );
 
     }
 
-    createBasicAuthenticationHttpHeader() {
-    let username = 'user'
-    let password = 'password'
-    let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
-    return basicAuthHeaderString;
-  }
+  //   createBasicAuthenticationHttpHeader() {
+  //   let username = 'user'
+  //   let password = 'password'
+  //   let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
+  //   return basicAuthHeaderString;
+  // }
   //Access to XMLHttpRequest at
   //'http://localhost:8080/hello-world/path-variable/in28minutes'
   //from origin 'http://localhost:4200' has been blocked by CORS policy:

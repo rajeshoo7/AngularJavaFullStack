@@ -1,4 +1,4 @@
-package com.in28minutes.rest.webservices.restfulwebservices.basic.auth;
+package com.raj.rest.webservices.restful_web_services.basic.auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

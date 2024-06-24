@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Todo } from '../../list-todos/list-todos.component';
 
@@ -9,65 +9,25 @@ export class TodoDataService {
 
   private readonly API_URL = 'http://localhost:8080';
 
-
   constructor(private http: HttpClient) {}
 
   retrieveAllTodos(username: string) {
-
-  let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
-
-  let headers = new HttpHeaders({
-      Authorization: basicAuthHeaderString
-    })
-
-
-
-    return this.http.get<Todo[]>(`${this.API_URL}/users/${username}/todos`,{headers});
-  }
-  createBasicAuthenticationHttpHeader() {
-    let username = 'user'
-    let password = 'password'
-    let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
-    return basicAuthHeaderString;
+    return this.http.get<Todo[]>(`${this.API_URL}/users/${username}/todos`);
   }
 
   deleteTodo(username: string, id: number) {
-    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
-
-  let headers = new HttpHeaders({
-      Authorization: basicAuthHeaderString
-    })
-    return this.http.delete(`${this.API_URL}/users/${username}/todos/${id}`,{headers});
+    return this.http.delete(`${this.API_URL}/users/${username}/todos/${id}`);
   }
 
   retrieveTodo(username: string, id: number) {
-    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
-
-  let headers = new HttpHeaders({
-      Authorization: basicAuthHeaderString
-    })
-    return this.http.get<Todo>(`${this.API_URL}/users/${username}/todos/${id}`,{headers});
+    return this.http.get<Todo>(`${this.API_URL}/users/${username}/todos/${id}`);
   }
 
   updateTodo(username: string, id: number, todo: Todo) {
-    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
-
-  let headers = new HttpHeaders({
-      Authorization: basicAuthHeaderString
-    })
-    return this.http.put(`${this.API_URL}/users/${username}/todos/${id}`, todo,{headers});
+    return this.http.put(`${this.API_URL}/users/${username}/todos/${id}`, todo);
   }
 
   createTodo(username: string, todo: Todo) {
-
-    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
-
-  let headers = new HttpHeaders({
-      Authorization: basicAuthHeaderString
-    })
-
-    return this.http.post(`${this.API_URL}/users/${username}/todos`, todo,{headers});
+    return this.http.post(`${this.API_URL}/users/${username}/todos`, todo);
   }
-
-
 }
