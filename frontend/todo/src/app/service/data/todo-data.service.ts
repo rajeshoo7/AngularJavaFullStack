@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Todo } from '../../list-todos/list-todos.component';
 
@@ -7,35 +7,67 @@ import { Todo } from '../../list-todos/list-todos.component';
 })
 export class TodoDataService {
 
-  TODO_JPA_API_URL =`http://localhost:8080`
+  private readonly API_URL = 'http://localhost:8080';
 
-  constructor(
-    private http:HttpClient
-  ) { }
 
+  constructor(private http: HttpClient) {}
 
   retrieveAllTodos(username: string) {
-    return this.http.get<Todo[]>(`http://localhost:8080/users/${username}/todos`);
-    //console.log("Execute Hello World Bean Service")
+
+  let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
+
+  let headers = new HttpHeaders({
+      Authorization: basicAuthHeaderString
+    })
+
+
+
+    return this.http.get<Todo[]>(`${this.API_URL}/users/${username}/todos`,{headers});
+  }
+  createBasicAuthenticationHttpHeader() {
+    let username = 'user'
+    let password = 'password'
+    let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
+    return basicAuthHeaderString;
   }
 
   deleteTodo(username: string, id: number) {
-    return this.http.delete(`http://localhost:8080/users/${username}/todos/${id}`);
+    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
+
+  let headers = new HttpHeaders({
+      Authorization: basicAuthHeaderString
+    })
+    return this.http.delete(`${this.API_URL}/users/${username}/todos/${id}`,{headers});
   }
 
   retrieveTodo(username: string, id: number) {
-    return this.http.get<Todo>(`http://localhost:8080/users/${username}/todos/${id}`);
+    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
+
+  let headers = new HttpHeaders({
+      Authorization: basicAuthHeaderString
+    })
+    return this.http.get<Todo>(`${this.API_URL}/users/${username}/todos/${id}`,{headers});
   }
 
   updateTodo(username: string, id: number, todo: Todo) {
-    return this.http.put(
-      `http://localhost:8080/users/${username}/todos/${id}`
-      , todo);
+    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
+
+  let headers = new HttpHeaders({
+      Authorization: basicAuthHeaderString
+    })
+    return this.http.put(`${this.API_URL}/users/${username}/todos/${id}`, todo,{headers});
   }
 
   createTodo(username: string, todo: Todo) {
-    return this.http.post(
-      `http://localhost:8080/users/${username}/todos`
-      , todo);
+
+    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
+
+  let headers = new HttpHeaders({
+      Authorization: basicAuthHeaderString
+    })
+
+    return this.http.post(`${this.API_URL}/users/${username}/todos`, todo,{headers});
   }
+
+
 }

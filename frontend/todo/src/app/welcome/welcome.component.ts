@@ -2,13 +2,20 @@ import { HelloWorldBean, WelcomeDataService } from './../service/data/welcome-da
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpIntercepterBasicAuthService } from '..//service/http/http-intercepter-basic-auth.service';
 
 @Component({
   selector: 'app-welcome',
   standalone: true,
   imports: [RouterLink, NgIf, HttpClientModule],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpIntercepterBasicAuthService,
+    multi: true
+
+  }],
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',
 })

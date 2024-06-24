@@ -15,6 +15,9 @@ public class Todo {
 	private Date targetDate;
 	private boolean isDone;
 	
+	protected Todo() {
+		
+	}
 	public boolean isDone() {
 		return isDone;
 	}

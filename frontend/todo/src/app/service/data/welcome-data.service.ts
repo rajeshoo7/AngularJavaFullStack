@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 export class HelloWorldBean {
@@ -18,21 +18,47 @@ export class WelcomeDataService {
   executeHelloWorldBeanService(){
 
     console.log("Execute Hello World Bean Service");
+    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
 
-    return this.http.get<HelloWorldBean>('http://localhost:8080/hello-world-bean');
+    let headers = new HttpHeaders({
+        Authorization: basicAuthHeaderString
+      })
+
+    return this.http.get<HelloWorldBean>('http://localhost:8080/hello-world-bean',{headers});
 
 
 
   }
 
   executeHelloWorldBeanServiceWithPathVariable(name:string){
+    let basicAuthHeaderString = this.createBasicAuthenticationHttpHeader();
+
+    let headers = new HttpHeaders({
+        Authorization: basicAuthHeaderString
+      })
+
 
     console.log("Execute Hello World Bean Service");
 
-    return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world/path-variable/${name}`);
+    return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world/path-variable/${name}`,{headers});
 
     }
 
+    createBasicAuthenticationHttpHeader() {
+    let username = 'user'
+    let password = 'password'
+    let basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
+    return basicAuthHeaderString;
+  }
+  //Access to XMLHttpRequest at
+  //'http://localhost:8080/hello-world/path-variable/in28minutes'
+  //from origin 'http://localhost:4200' has been blocked by CORS policy:
+  //No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+  //Access to XMLHttpRequest at 'http://localhost:8080/hello-world/path-variable/RR' from origin 'http://localhost:4200'
+  //has been blocked by CORS policy:
+  //Response to preflight request doesn't pass
+  //access control check: It does not have HTTP ok status
 
 
 
