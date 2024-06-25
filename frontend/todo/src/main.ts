@@ -1,5 +1,7 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
+import { HttpIntercepterBasicAuthService } from './app/service/http/http-intercepter-basic-auth.service';
+
 
 import { AppComponent } from './app/app.component';
 
